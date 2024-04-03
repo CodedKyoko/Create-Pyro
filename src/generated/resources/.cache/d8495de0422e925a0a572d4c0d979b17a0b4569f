@@ -1,0 +1,5 @@
+// 1.20.1	2024-04-03T16:14:59.8826212	Registrate Provider for createpyro [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+8b8c1a9c2f6c9f4d7b0ee20b82066d450e58c5b4 assets/createpyro/blockstates/gun_powder_wire.json
+4b5eb94e39d50587cf753259c7868f45d58aa19a assets/createpyro/lang/en_ud.json
+82bceac637ba430ed963f605b7b7ed67471445de assets/createpyro/lang/en_us.json
+b92ed8e179aeb53038297611c31aa5c47f07d480 data/createpyro/loot_tables/blocks/gun_powder_wire.json

@@ -1,0 +1,41 @@
+modLoader = "javafml"
+loaderVersion = "[${forge_version},)"
+license = "MIT"
+
+[[mods]]
+modId = "createpyro"
+version = "${version}"
+displayName = "Create: Pyro"
+# JSON update specification https://mcforge.readthedocs.io/en/latest/gettingstarted/autoupdate/
+#updateJSONURL="https://change.me.example.invalid/updates.json"
+logoFile = "logo.png"
+credits = ""
+authors = ""
+
+displayTest = "MATCH_VERSION"
+
+description = '''
+A Create addon that adds Pyrotechnic!
+'''
+
+[[dependencies.createpyro]]
+modId = "forge"
+mandatory = true
+versionRange = "[47,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.createpyro]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.20.1,1.21)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.createpyro]]
+modId = "create"
+mandatory = true
+versionRange = "[0.5.1.f,)"
+ordering = "NONE"
+side = "BOTH"
+

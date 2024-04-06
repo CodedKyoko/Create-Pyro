@@ -4,6 +4,8 @@ package org.dev.createpyro;
 
 import com.simibubi.create.foundation.data.CreateRegistrate;
 
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 
 import net.minecraftforge.common.MinecraftForge;
@@ -12,6 +14,7 @@ import net.minecraftforge.fml.ModContainer;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 import org.apache.commons.lang3.StringUtils;
@@ -32,7 +35,7 @@ public class Pyro {
 	public static final Logger LOGGER = LoggerFactory.getLogger(NAME);
 
 	public static final String VERSION = getVersion();
-    public static final CreateRegistrate PYRO_REGISTRATE = CreateRegistrate.create(Pyro.ID);
+    //public static final CreateRegistrate PYRO_REGISTRATE = CreateRegistrate.create(Pyro.ID);
 
 
 	public Pyro() {
@@ -43,10 +46,12 @@ public class Pyro {
 		ModLoadingContext context = ModLoadingContext.get();
 		MinecraftForge.EVENT_BUS.register(this);
 		IEventBus forgeEventBus = MinecraftForge.EVENT_BUS;
-		PYRO_REGISTRATE.registerEventListeners(modEventBus);
+		//PYRO_REGISTRATE.registerEventListeners(modEventBus);
 		PyroBlocks.init();
+		PyroBlocks.register(modEventBus);
 		PyroBlockEntities.init();
 
+		modEventBus.addListener(this::clientSetup);
 	}
 
 	public static String toHumanReadable(String key) {
@@ -70,5 +75,9 @@ public class Pyro {
 				.getModInfo()
 				.getVersion()
 				.toString();
+	}
+
+	private void clientSetup(final FMLClientSetupEvent event){
+		ItemBlockRenderTypes.setRenderLayer(PyroBlocks.GUN_POWDER_WIRE.get(), RenderType.cutoutMipped());
 	}
 }

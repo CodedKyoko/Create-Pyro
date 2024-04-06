@@ -2,16 +2,15 @@
     "ambientocclusion": false,
     "textures": {
         "particle": "createpyro:block/gun_powder_dot",
-        "line": "createpyro:block/gun_powder_dot",
         "overlay": "createpyro:block/gun_powder_overlay"
     },
     "elements": [
-        {   "from": [ 0, 0.25, 0 ],
+        {   "from": [ 0, 0.25, 8 ],
             "to": [ 16, 0.25, 16 ],
             "shade": false,
             "faces": {
-                "up": { "uv": [ 0, 0, 16, 16 ], "texture": "#line", "tintindex": 0 },
-                "down": { "uv": [ 0, 16, 16, 0 ], "texture": "#line", "tintindex": 0 }
+                "up": { "uv": [ 0, 8, 16, 16 ], "texture": "#line", "tintindex": 0 },
+                "down": { "uv": [ 0, 16, 16, 8 ], "texture": "#line", "tintindex": 0 }
             }
         }
     ]

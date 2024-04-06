@@ -2,8 +2,10 @@ package org.dev.createpyro.block;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -12,14 +14,17 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.*;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.apache.logging.log4j.LogManager;
 import org.dev.createpyro.Pyro;
+import org.dev.createpyro.registry.PyroBlocks;
 
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 import java.util.logging.Logger;
 
 public class GunPowderWireBlock extends Block {
@@ -32,29 +37,25 @@ public class GunPowderWireBlock extends Block {
     private static final Map<Direction, VoxelShape> SHAPES_FLOOR;
     private static final Map<Direction, VoxelShape> SHAPES_UP;
     private static final Map<BlockState, VoxelShape> SHAPES_CACHE;
+    private static final Vec3 COLOR;
     private final BlockState crossState;
 
 
     public GunPowderWireBlock(Properties properties) {
         super(properties);
         this.registerDefaultState(
-                (BlockState) (
-                        (BlockState) (
-                                (BlockState) (
-                                        (BlockState) (
-                                                (BlockState) this.stateDefinition.any()
-                                        ).setValue(NORTH, 0)
-                                ).setValue(EAST, 0)
-                        ).setValue(SOUTH, 0)
-                ).setValue(WEST, 0)
+                (BlockState) ((BlockState) ((BlockState) ((BlockState) ((BlockState) this.stateDefinition.any())
+                        .setValue(NORTH, 0))
+                        .setValue(EAST, 0))
+                        .setValue(SOUTH, 0))
+                        .setValue(WEST, 0)
         );
         this.crossState = (BlockState)(
-                (BlockState)(
-                        (BlockState)(
-                                (BlockState)this.defaultBlockState().setValue(NORTH, 1)
-                        ).setValue(EAST, 1)
-                ).setValue(SOUTH, 1)
-        ).setValue(WEST, 1);
+                (BlockState) ((BlockState) ((BlockState)this.defaultBlockState()
+                        .setValue(NORTH, 1))
+                        .setValue(EAST, 1))
+                        .setValue(SOUTH, 1))
+                        .setValue(WEST, 1);
         for (BlockState blockstate : this.getStateDefinition().getPossibleStates()) {
             SHAPES_CACHE.put(blockstate, this.calculateShape(blockstate));
         }
@@ -89,10 +90,8 @@ public class GunPowderWireBlock extends Block {
         boolean flag = isDot(state);
         state = this.getMissingConnections(level, (BlockState)this.defaultBlockState(), pos);
         if (flag && isDot(state)) {
-            ((Logger) LogManager.getLogger(Pyro.ID)).info("default");
             return state;
         } else {
-            ((Logger) LogManager.getLogger(Pyro.ID)).info("generated");
             boolean flag1 = state.getValue(NORTH) != 0;
             boolean flag2 = state.getValue(SOUTH) != 0;
             boolean flag3 = state.getValue(EAST) != 0;
@@ -120,7 +119,7 @@ public class GunPowderWireBlock extends Block {
     }
 
     private BlockState getMissingConnections(BlockGetter level, BlockState state, BlockPos pos) {
-        boolean flag = canConnectTo(level.getBlockState(pos.above())); //!level.getBlockState(pos.above()).isRedstoneConductor(level, pos);
+        boolean flag = !level.getBlockState(pos.above()).isRedstoneConductor(level, pos);
         Iterator var5 = Direction.Plane.HORIZONTAL.iterator();
 
         while(var5.hasNext()) {
@@ -139,7 +138,7 @@ public class GunPowderWireBlock extends Block {
     }
 
     private int getConnectingSide(BlockGetter level, BlockPos pos, Direction face) {
-        return this.getConnectingSide(level, pos, face, !canConnectTo(level.getBlockState(pos.above())));
+        return this.getConnectingSide(level, pos, face, !level.getBlockState(pos.above()).isRedstoneConductor(level, pos));
     }
 
     private int getConnectingSide(BlockGetter level, BlockPos pos, Direction direction, boolean nonNormalCubeAbove) {
@@ -166,6 +165,7 @@ public class GunPowderWireBlock extends Block {
         }
     }
 
+    @Override
     public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
         BlockPos blockpos = pos.below();
         BlockState blockstate = level.getBlockState(blockpos);
@@ -208,6 +208,9 @@ public class GunPowderWireBlock extends Block {
                 dropResources(state, level, pos);
                 level.removeBlock(pos, false);
             }
+            else {
+                level.setBlock(pos, this.getConnectionState(level, this.crossState, pos), 3);
+            }
         }
     }
 
@@ -215,8 +218,12 @@ public class GunPowderWireBlock extends Block {
         builder.add(new Property[]{NORTH, EAST, SOUTH, WEST});
     }
 
+    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random){
+
+    }
+
     public boolean canConnectTo(BlockState state){
-        return state.getBlock() instanceof GunPowderWireBlock;
+        return state.is(PyroBlocks.GUN_POWDER_WIRE.get());
     }
 
     static{
@@ -260,5 +267,7 @@ public class GunPowderWireBlock extends Block {
                 )
         );
         SHAPES_CACHE = Maps.newHashMap();
+
+        COLOR = new Vec3(0.5, 0.5, 0.5);
     }
 }

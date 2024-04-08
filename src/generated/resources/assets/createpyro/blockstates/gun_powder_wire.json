@@ -1,7 +1,183 @@
 {
-  "variants": {
-    "": {
-      "model": "createpyro:block/gun_powder_wire"
+  "multipart": [
+    {
+      "apply": {
+        "model": "createpyro:block/gun_powder_dot"
+      },
+      "when": {
+        "OR": [
+          {
+            "east": 0,
+            "north": 0,
+            "south": 0,
+            "west": 0
+          },
+          {
+            "east": 1,
+            "north": 1
+          },
+          {
+            "east": 1,
+            "south": 1
+          },
+          {
+            "south": 1,
+            "west": 1
+          },
+          {
+            "north": 1,
+            "west": 1
+          },
+
+          {
+            "east": 1,
+            "north": 2
+          },
+          {
+            "east": 1,
+            "south": 2
+          },
+          {
+            "south": 1,
+            "west": 2
+          },
+          {
+            "north": 1,
+            "west": 2
+          },
+
+          {
+            "east": 2,
+            "north": 1
+          },
+          {
+            "east": 2,
+            "south": 1
+          },
+          {
+            "south": 2,
+            "west": 1
+          },
+          {
+            "north": 2,
+            "west": 1
+          },
+
+          {
+            "east": 2,
+            "north": 2
+          },
+          {
+            "east": 2,
+            "south": 2
+          },
+          {
+            "south": 2,
+            "west": 2
+          },
+          {
+            "north": 2,
+            "west": 2
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "createpyro:block/gun_powder_side0"
+      },
+      "when": {
+        "OR": [
+          {
+            "north": 1
+          },
+          {
+            "north": 2
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "createpyro:block/gun_powder_side_alt0"
+      },
+      "when": {
+        "OR": [
+          {
+            "south": 1
+          },
+          {
+            "south": 2
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "createpyro:block/gun_powder_side_alt1",
+        "y": 270
+      },
+      "when": {
+        "OR": [
+          {
+            "east": 1
+          },
+          {
+            "east": 2
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "createpyro:block/gun_powder_side1",
+        "y": 270
+      },
+      "when": {
+        "OR": [
+          {
+            "west": 1
+          },
+          {
+            "west": 2
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "createpyro:block/gun_powder_up"
+      },
+      "when": {
+        "north": 2
+      }
+    },
+    {
+      "apply": {
+        "model": "createpyro:block/gun_powder_up",
+        "y": 90
+      },
+      "when": {
+        "east": 2
+      }
+    },
+    {
+      "apply": {
+        "model": "createpyro:block/gun_powder_up",
+        "y": 180
+      },
+      "when": {
+        "south": 2
+      }
+    },
+    {
+      "apply": {
+        "model": "createpyro:block/gun_powder_up",
+        "y": 270
+      },
+      "when": {
+        "west": 2
+      }
     }
-  }
+  ]
 }

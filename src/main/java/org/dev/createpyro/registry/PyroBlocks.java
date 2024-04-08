@@ -1,24 +1,36 @@
 package org.dev.createpyro.registry;
 
-import com.simibubi.create.foundation.data.AssetLookup;
-import com.tterrag.registrate.providers.loot.RegistrateBlockLootTables;
-import com.tterrag.registrate.util.entry.BlockEntry;
-import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.data.loot.BlockLootSubProvider;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.PushReaction;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
+import org.dev.createpyro.Pyro;
 import org.dev.createpyro.block.GunPowderWireBlock;
 
-import static org.dev.createpyro.Pyro.PYRO_REGISTRATE;
+import java.util.function.Supplier;
 
 public class PyroBlocks {
-    public static void init() {
+    public static final DeferredRegister<Block> BLOCKS =
+            DeferredRegister.create(ForgeRegistries.BLOCKS, Pyro.ID);
+
+    public static final RegistryObject<Block> GUN_POWDER_WIRE = registerBlock("gun_powder_wire",
+            () -> new GunPowderWireBlock(BlockBehaviour.Properties.of()
+                    .noCollission()
+                    .instabreak()
+                    .pushReaction(PushReaction.DESTROY)
+            ));
+
+    private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block){
+        RegistryObject<T> toReturn = BLOCKS.register(name, block);
+        return toReturn;
     }
 
-    public static final BlockEntry<GunPowderWireBlock> GUN_WIRE = PYRO_REGISTRATE.block("gun_powder_wire", GunPowderWireBlock::new)
-            .properties(p -> p.strength(0.01F).noOcclusion())
-            .blockstate((ctx, prov) -> prov.simpleBlock(ctx.getEntry(), AssetLookup.standardModel(ctx, prov)))
-            .loot((lt, b) -> lt.add(b, lt.createSingleItemTable(Items.GUNPOWDER)))
-            .addLayer(() -> RenderType::cutoutMipped)
-            .register();
+    public static void register(IEventBus eventBus){
+        BLOCKS.register(eventBus);
+    }
+    public static void init() {
+    }
 }

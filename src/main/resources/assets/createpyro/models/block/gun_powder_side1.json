@@ -1,0 +1,6 @@
+{
+    "parent": "createpyro:block/gun_powder_side",
+    "textures": {
+        "line": "createpyro:block/gun_powder_line1"
+    }
+}

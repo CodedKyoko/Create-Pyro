@@ -17,10 +17,12 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
+import net.minecraftforge.registries.RegisterEvent;
 import org.apache.commons.lang3.StringUtils;
 
 import org.dev.createpyro.registry.PyroBlockEntities;
 import org.dev.createpyro.registry.PyroBlocks;
+import org.dev.createpyro.registry.PyroItems;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,15 +30,16 @@ import java.util.Arrays;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@Mod(Pyro.ID)
+@Mod(Pyro.MOD_ID)
 public class Pyro {
-	public static final String ID = "createpyro";
+	public static final String MOD_ID = "createpyro";
 	public static final String NAME = "Create: Pyro";
 	public static final Logger LOGGER = LoggerFactory.getLogger(NAME);
 
 	public static final String VERSION = getVersion();
     //public static final CreateRegistrate PYRO_REGISTRATE = CreateRegistrate.create(Pyro.ID);
 
+	public static CreateRegistrate REGISTRATE = CreateRegistrate.create(MOD_ID);
 
 	public Pyro() {
 
@@ -47,11 +50,13 @@ public class Pyro {
 		MinecraftForge.EVENT_BUS.register(this);
 		IEventBus forgeEventBus = MinecraftForge.EVENT_BUS;
 		//PYRO_REGISTRATE.registerEventListeners(modEventBus);
-		PyroBlocks.init();
 		PyroBlocks.register(modEventBus);
 		PyroBlockEntities.init();
+		PyroItems.register();
+		REGISTRATE.registerEventListeners(modEventBus);
 
 		modEventBus.addListener(this::clientSetup);
+		modEventBus.addListener(this::commonSetup);
 	}
 
 	public static String toHumanReadable(String key) {
@@ -62,13 +67,13 @@ public class Pyro {
 	}
 
 	public static ResourceLocation asResource(String name) {
-		return new ResourceLocation(ID, name);
+		return new ResourceLocation(MOD_ID, name);
 	}
 
 	private static String getVersion() {
-		Optional<? extends ModContainer> container = ModList.get().getModContainerById(ID);
+		Optional<? extends ModContainer> container = ModList.get().getModContainerById(MOD_ID);
 		if(container.isEmpty()) {
-			LOGGER.warn("Could not find mod container for modid " + ID);
+			LOGGER.warn("Could not find mod container for modid " + MOD_ID);
 			return "UNKNOWN";
 		}
 		return container.get()
@@ -76,7 +81,10 @@ public class Pyro {
 				.getVersion()
 				.toString();
 	}
-
+	
+	public void commonSetup(final RegisterEvent event) {
+	}
+	
 	private void clientSetup(final FMLClientSetupEvent event){
 		ItemBlockRenderTypes.setRenderLayer(PyroBlocks.GUN_POWDER_WIRE.get(), RenderType.cutoutMipped());
 	}

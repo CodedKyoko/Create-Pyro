@@ -6,6 +6,9 @@
   "client": [
   ],
   "mixins": [
+    "FallingBlockEntityMixin",
+    "ExplosionMixin",
+    "ServerLevelMixin"
   ],
   "injectors": {
     "defaultRequire": 1

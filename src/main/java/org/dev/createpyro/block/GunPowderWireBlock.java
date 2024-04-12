@@ -2,7 +2,6 @@ package org.dev.createpyro.block;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
@@ -18,14 +17,10 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import org.apache.logging.log4j.LogManager;
-import org.dev.createpyro.Pyro;
 import org.dev.createpyro.registry.PyroBlocks;
 
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
-import java.util.logging.Logger;
 
 public class GunPowderWireBlock extends Block {
     public static final IntegerProperty NORTH;

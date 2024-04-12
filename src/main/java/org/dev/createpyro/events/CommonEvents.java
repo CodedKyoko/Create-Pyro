@@ -1,21 +1,12 @@
 package org.dev.createpyro.events;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.BlockParticleOption;
-import net.minecraft.core.particles.ParticleOptions;
-import net.minecraft.core.particles.ParticleType;
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.ParticleUtils;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.item.FallingBlockEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
@@ -33,8 +24,9 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 import java.util.Random;
 
-@Mod.EventBusSubscriber(modid = Pyro.ID)
+@Mod.EventBusSubscriber(modid = Pyro.MOD_ID)
 public class CommonEvents {
+    
     public static final Logger LOGGER = LoggerFactory.getLogger(Pyro.NAME);
     private static Random random = new Random();
 
@@ -42,26 +34,15 @@ public class CommonEvents {
     public static InteractionResult gunPowderRightClick(PlayerInteractEvent.RightClickBlock event) {
         ItemStack stack = event.getItemStack();
 
-        if (stack.getItem() != Items.GUNPOWDER) return InteractionResult.FAIL;
-
-        BlockPos pos = event.getPos();
-        BlockState state = PyroBlocks.GUN_POWDER_WIRE.get().getStateForPlacement(
-                new BlockPlaceContext(event.getEntity(), event.getHand(), event.getItemStack(),
-                        event.getHitVec()));
-
-        Level _level = event.getLevel();
-
-        Entity entity = event.getEntity();
-
-        if (entity instanceof Player _plr ? !_plr.getAbilities().instabuild : true){
-            stack.shrink(1);
-        }
-        if (!_level.isClientSide()) {
-            _level.playSound(null, pos, state.getSoundType().getPlaceSound(), SoundSource.BLOCKS, 1, 1);
-        }
-        event.getLevel().setBlockAndUpdate(pos.relative(event.getFace()), state);
-
-        return InteractionResult.SUCCESS;
+        if (stack.getItem() != Items.GUNPOWDER) return InteractionResult.PASS;
+        
+        InteractionResult interactionResult = PyroBlocks.GUN_POWDER_WIRE
+            .asItem().useOn(new UseOnContext(event.getEntity(), event.getHand(), event.getHitVec()));
+        
+        if (event.getLevel().isClientSide && interactionResult.shouldSwing())
+            event.getEntity().swing(event.getHand());
+        
+       return interactionResult;
     }
 
     @SubscribeEvent

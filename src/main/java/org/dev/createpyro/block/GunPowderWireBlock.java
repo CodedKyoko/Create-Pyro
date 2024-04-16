@@ -33,6 +33,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.dev.createpyro.Pyro;
 import org.dev.createpyro.registry.PyroBlocks;
+import org.dev.createpyro.registry.PyroParticles;
 import org.joml.Vector3f;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -412,7 +413,7 @@ public class GunPowderWireBlock extends Block {
             double d0 = (double)pos.getX() + random.nextDouble();
             double d1 = (double)pos.getY() + 0.0;
             double d2 = (double)pos.getZ() + random.nextDouble();
-            level.addParticle(ParticleTypes.SMOKE, d0, d1, d2, 0.0, 0.0, 0.0);
+            level.addParticle(PyroParticles.SPARK_PARTICLES.get(), d0, d1, d2, 0.0, 0.0, 0.0);
             d0 = (double)pos.getX() + random.nextDouble();
             d1 = (double)pos.getY() + 0.0;
             d2 = (double)pos.getZ() + random.nextDouble();
@@ -430,7 +431,7 @@ public class GunPowderWireBlock extends Block {
             double d1 = 0.5 + (double)(0.4375F * (float)xDirection.getStepY()) + (double)(f2 * (float)zDirection.getStepY());
             double d2 = 0.5 + (double)(0.4375F * (float)xDirection.getStepZ()) + (double)(f2 * (float)zDirection.getStepZ());
             //level.addParticle(new DustParticleOptions(new Vector3f(0.1F, 0.1F, 0.1F), 1.0F), (double)pos.getX() + d0, (double)pos.getY() + d1, (double)pos.getZ() + d2, 0.0, 0.0, 0.0);
-            level.addParticle(ParticleTypes.LAVA, d0, d1, d2, 0.0, 0.0, 0.0);
+            level.addParticle(PyroParticles.SPARK_PARTICLES.get(), d0, d1, d2, 0.0, 0.0, 0.0);
             level.playLocalSound(d0, d1, d2, SoundEvents.TNT_PRIMED, SoundSource.BLOCKS, 0.2F + random.nextFloat() * 0.2F, 0.9F + random.nextFloat() * 0.15F, false);
 
         }

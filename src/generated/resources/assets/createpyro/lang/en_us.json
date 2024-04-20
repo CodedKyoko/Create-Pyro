@@ -1,4 +1,7 @@
 {
   "block.createpyro.gun_powder_wire": "Gun Powder Wire",
-  "block.createpyro.red_button": "Red Button"
+  "block.createpyro.red_button": "Red Button",
+  "createpyro.ponder.red_button.header": "Red Button",
+  "createpyro.ponder.red_button.text_1": "Red Button works like normal button...",
+  "createpyro.ponder.red_button.text_2": "...but it also can ignite Gunpowder Wire."
 }

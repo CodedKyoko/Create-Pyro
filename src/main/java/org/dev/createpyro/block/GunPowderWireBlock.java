@@ -27,6 +27,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.*;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -330,6 +331,12 @@ public class GunPowderWireBlock extends Block {
         }
     }
 
+    @Override
+    public ItemStack getCloneItemStack(BlockState state, HitResult target, BlockGetter world, BlockPos pos, Player player) {
+        return new ItemStack(Items.GUNPOWDER);
+    }
+
+
     public void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, BlockPos neighborPos, boolean movedByPiston) {
         if (!level.isClientSide) {
             if (!state.canSurvive(level, pos)) {
@@ -381,7 +388,7 @@ public class GunPowderWireBlock extends Block {
     }
 
     public boolean canConnectTo(BlockState state, boolean isDown){
-        return state.is(PyroBlocks.GUN_POWDER_WIRE.get()) || (state.is(Blocks.TNT) && !isDown);
+        return state.is(PyroBlocks.GUN_POWDER_WIRE.get()) || (state.is(Blocks.TNT) && !isDown) || (state.is(PyroBlocks.RED_BUTTON.get()));
     }
 
     public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {

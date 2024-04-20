@@ -5,6 +5,7 @@ import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -12,6 +13,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.dev.createpyro.Pyro;
 import org.dev.createpyro.block.GunPowderWireBlock;
+import org.dev.createpyro.block.RedButtonBlock;
 
 import java.util.function.Supplier;
 
@@ -32,6 +34,17 @@ public class PyroBlocks {
         )
         .simpleItem()
         .register();
+
+    public static final BlockEntry<RedButtonBlock> RED_BUTTON = REGISTRATE.block("red_button",
+            (properties) -> new RedButtonBlock(BlockBehaviour.Properties.of()
+                    .noCollission()
+                    .pushReaction(PushReaction.DESTROY)
+                    .strength(0.5F), BlockSetType.IRON, 20, true))
+            .loot(((registrateBlockLootTables, redButtonBlock) ->
+                registrateBlockLootTables.dropSelf(redButtonBlock))
+            )
+            .simpleItem()
+            .register();
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block){
         RegistryObject<T> toReturn = BLOCKS.register(name, block);

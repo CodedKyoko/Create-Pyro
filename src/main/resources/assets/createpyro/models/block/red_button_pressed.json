@@ -1,0 +1,71 @@
+{
+  "credit": "Made with Blockbench",
+  "texture_size": [32, 32],
+  "textures": {
+    "main": "createpyro:block/red_button",
+    "particle": "createpyro:block/red_button"
+  },
+  "elements": [
+    {
+      "from": [4, 0, 4],
+      "to": [12, 1, 12],
+      "faces": {
+        "north": {"uv": [16, 7, 8, 8], "texture": "#main"},
+        "east": {"uv": [16, 0, 8, 1], "texture": "#main"},
+        "south": {"uv": [8, 7, 16, 8], "texture": "#main"},
+        "west": {"uv": [8, 0, 16, 1], "texture": "#main"},
+        "up": {"uv": [16, 8, 8, 0], "texture": "#main"},
+        "down": {"uv": [8, 0, 0, 8], "texture": "#main"}
+      }
+    },
+    {
+      "from": [5, 1, 5],
+      "to": [11, 2, 11],
+      "faces": {
+        "north": {"uv": [0, 13, 6, 14], "rotation": 180, "texture": "#main"},
+        "east": {"uv": [0, 8, 1, 14], "rotation": 90, "texture": "#main"},
+        "south": {"uv": [0, 8, 6, 9], "texture": "#main"},
+        "west": {"uv": [5, 8, 6, 14], "rotation": 270, "texture": "#main"},
+        "up": {"uv": [6, 14, 0, 8], "texture": "#main"},
+        "down": {"uv": [7, 3, 4, 6], "texture": "#main"}
+      }
+    }
+  ],
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [75, 45, 0],
+      "translation": [0, 2.5, 2.75],
+      "scale": [0.5, 0.5, 0.5]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [75, 45, 0],
+      "translation": [0, 2.5, 2.5],
+      "scale": [0.5, 0.5, 0.5]
+    },
+    "firstperson_righthand": {
+      "rotation": [0, 45, 0],
+      "translation": [0, 3.5, 0],
+      "scale": [0.5, 0.5, 0.5]
+    },
+    "firstperson_lefthand": {
+      "rotation": [0, 45, 0],
+      "translation": [0, 3.5, 0],
+      "scale": [0.5, 0.5, 0.5]
+    },
+    "ground": {
+      "translation": [0, 3, 0],
+      "scale": [0.5, 0.5, 0.5]
+    },
+    "gui": {
+      "rotation": [30, 225, 0],
+      "translation": [0, 4.75, 0]
+    },
+    "head": {
+      "translation": [0, 14.25, 0]
+    },
+    "fixed": {
+      "rotation": [-90, 0, 0],
+      "translation": [0, 0, -7.25]
+    }
+  }
+}

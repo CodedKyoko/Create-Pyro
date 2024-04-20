@@ -8,8 +8,10 @@ import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModContainer;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -59,6 +61,10 @@ public class Pyro {
 
 		modEventBus.addListener(this::clientSetup);
 		modEventBus.addListener(this::commonSetup);
+
+		DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
+			PyroClient.onCtorClient(modEventBus, MinecraftForge.EVENT_BUS);
+		});
 	}
 
 	public static String toHumanReadable(String key) {

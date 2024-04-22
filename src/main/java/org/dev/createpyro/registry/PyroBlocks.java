@@ -1,8 +1,8 @@
 package org.dev.createpyro.registry;
 
-import com.tterrag.registrate.providers.loot.RegistrateBlockLootTables;
+
 import com.tterrag.registrate.util.entry.BlockEntry;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
@@ -31,8 +31,7 @@ public class PyroBlocks {
             ))
         .loot((registrateBlockLootTables, gunPowderWireBlock) ->
             registrateBlockLootTables.dropOther(gunPowderWireBlock, Items.GUNPOWDER.asItem())
-        )
-        .simpleItem()
+        ).item().removeTab(CreativeModeTabs.SEARCH).build()
         .register();
 
     public static final BlockEntry<RedButtonBlock> RED_BUTTON = REGISTRATE.block("red_button",

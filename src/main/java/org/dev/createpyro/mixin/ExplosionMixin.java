@@ -105,9 +105,9 @@ public abstract class ExplosionMixin {
                 Vec3 sourcePos = getPosition();
                 
                 Vec3 relative = new Vec3(
-                    (blockPos.getX() - sourcePos.x) * 0.5F,
-                    (blockPos.getY() - sourcePos.y) * 0.5F + 1,
-                    (blockPos.getZ() - sourcePos.z) * 0.5F
+                    (blockPos.getX() - sourcePos.x + 0.5) * 0.5F,
+                    (blockPos.getY() - sourcePos.y + 0.5) * 0.5F + 0.5,
+                    (blockPos.getZ() - sourcePos.z + 0.5) * 0.5F
                 );
                 
                 FallingBlockEntity fallingblockentity = new FallingBlockEntity(EntityType.FALLING_BLOCK, ItemDropFallingTracker.LEVEL);

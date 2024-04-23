@@ -1,5 +1,6 @@
 package org.dev.createpyro.registry;
 
+import com.simibubi.create.content.processing.sequenced.SequencedAssemblyItem;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
@@ -19,4 +20,10 @@ public class PyroItems {
             REGISTRATE.item("lit_dynamite", LitDynamiteItem::new)
                     .removeTab(CreativeModeTabs.SEARCH)
                     .register();
+
+    public static ItemEntry<Item> CRUSHED_COAL =
+            REGISTRATE.item("crushed_coal", Item::new).register();
+
+    public static ItemEntry<Item> CLEAN_COAL_DUST =
+            REGISTRATE.item("clean_coal_dust", Item::new).register();
 }

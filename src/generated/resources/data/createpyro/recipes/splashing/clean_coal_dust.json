@@ -1,0 +1,13 @@
+{
+  "type": "create:splashing",
+  "ingredients": [
+    {
+      "item": "createpyro:crushed_coal"
+    }
+  ],
+  "results": [
+    {
+      "item": "createpyro:clean_coal_dust"
+    }
+  ]
+}

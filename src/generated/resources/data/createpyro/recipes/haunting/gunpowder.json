@@ -1,0 +1,13 @@
+{
+  "type": "create:haunting",
+  "ingredients": [
+    {
+      "item": "createpyro:clean_coal_dust"
+    }
+  ],
+  "results": [
+    {
+      "item": "minecraft:gunpowder"
+    }
+  ]
+}

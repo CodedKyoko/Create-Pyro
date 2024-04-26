@@ -1,0 +1,14 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "createpyro:item/match"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "createpyro:match_ignited": 1
+      },
+      "model": "createpyro:item/match_on"
+    }
+  ]
+}

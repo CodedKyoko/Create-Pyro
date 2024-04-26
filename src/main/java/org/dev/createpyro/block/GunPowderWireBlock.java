@@ -216,7 +216,7 @@ public class GunPowderWireBlock extends Block {
         return ignited ? InteractionResult.SUCCESS : InteractionResult.FAIL;
     }
 
-    public boolean ignite(Level level, BlockPos pos, BlockState state){
+    public static boolean ignite(Level level, BlockPos pos, BlockState state){
         if (state.getValue(IGNITION_TIME) == 0){
             level.setBlock(pos, state.setValue(IGNITION_TIME, 1), 11);
 

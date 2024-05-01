@@ -1,0 +1,31 @@
+{
+  "parent": "createpyro:root",
+  "criteria": {
+    "0": {
+      "conditions": {},
+      "trigger": ""
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "color": "#DBA213",
+      "translate": "advancement.createpyro.self_exploded.desc"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:flint_and_steel"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.createpyro.self_exploded"
+    }
+  },
+  "requirements": [
+    [
+      "0"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

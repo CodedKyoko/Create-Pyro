@@ -5,6 +5,5 @@
   "createpyro.ponder.red_button.text_1": "Red Button works like normal button...",
   "createpyro.ponder.red_button.text_2": "...but it also can ignite Gunpowder Wire.",
   "item.createpyro.crushed_coal": "Crushed Coal",
-  "item.createpyro.clean_coal_dust": "Clean Coal Dust",
-  "item.createpyro.match": "Match"
+  "item.createpyro.clean_coal_dust": "Clean Coal Dust"
 }

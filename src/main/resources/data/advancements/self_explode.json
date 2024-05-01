@@ -1,0 +1,31 @@
+{
+  "parent": "createpyro:ignite",
+  "criteria": {
+    "0": {
+      "conditions": {},
+      "trigger": ""
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "color": "#DBA213",
+      "translate": "advancement.createpyro.ignite.desc"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:tnt"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.createpyro.ignite"
+    }
+  },
+  "requirements": [
+    [
+      "0"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

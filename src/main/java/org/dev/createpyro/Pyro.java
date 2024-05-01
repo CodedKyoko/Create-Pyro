@@ -22,6 +22,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.RegisterEvent;
 import org.apache.commons.lang3.StringUtils;
 
+import org.dev.createpyro.registry.PyroTriggers;
 import org.dev.createpyro.registry.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -54,6 +55,8 @@ public class Pyro {
 		PyroBlockEntities.init();
 		PyroItems.register();
 		PyroEntities.register();
+		PyroAdvancements.register();
+		PyroTriggers.register();
 		PyroParticles.register(modEventBus);
 		REGISTRATE.registerEventListeners(modEventBus);
 
